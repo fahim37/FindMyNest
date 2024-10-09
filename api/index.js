@@ -21,6 +21,16 @@ app.get("/test", (req, res) => {
   res.send("hello");
 });
 
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+  return res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  });
+});
+
 app.listen(3000, () => {
   console.log("server is running");
 });

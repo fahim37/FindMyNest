@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import authRouter from "./routes/auth.route.js";
 dotenv.config();
 
 mongoose
@@ -12,7 +13,14 @@ mongoose
     console.log(err);
   });
 const app = express();
+app.use(express.json());
+
+app.use("/api/auth", authRouter);
+
+app.get("/test", (req, res) => {
+  res.send("hello");
+});
 
 app.listen(3000, () => {
-  console.log("server is running.dd");
+  console.log("server is running");
 });

@@ -1,17 +1,43 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({});
+  const navigate = useNavigate();
+
   const handleChange = (event) => {
     setFormData({
       ...formData,
       [event.target.id]: event.target.value,
     });
-    console.log(formData);
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      setLoading(true);
+      const res = await fetch(`/api/auth/signin`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+
+      if (data.success === false) {
+        setError(data.message);
+        setLoading(false);
+        return;
+      }
+      setLoading(false);
+      setError(null);
+      navigate("/");
+    } catch (error) {
+      setLoading(false);
+      setError(error.message);
+    }
   };
   return (
     <div className="p-3 max-w-lg mx-auto">
@@ -25,7 +51,7 @@ const SignIn = () => {
           onChange={handleChange}
         />
         <input
-          type="text"
+          type="password"
           className="border p-3 rounded-lg"
           placeholder="Password"
           id="password"
@@ -35,9 +61,16 @@ const SignIn = () => {
           disabled={loading}
           className="bg-slate-700 text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-75"
         >
-          {/* {loading ? "Almost there..." : "Sign Up"} */} Signup
+          {loading ? "Almost there..." : "Sign In"}
         </button>
       </form>
+      <div className="mt-3">
+        <span>Dont have an account?</span>
+        <Link to="/sign-up">
+          <span className="text-blue-700 mx-2 font-semibold"> Sign Up</span>
+        </Link>
+      </div>
+      {error && <p className="text-red-600">{error}</p>}
     </div>
   );
 };

@@ -6,6 +6,7 @@ import {
   signInSuccess,
   signInFailure,
 } from "../redux/user/userSlice";
+import OAuth from "../components/OAuth.jsx";
 
 const SignIn = () => {
   const { loading, error } = useSelector((state) => state.user);
@@ -67,6 +68,7 @@ const SignIn = () => {
         >
           {loading ? "Almost there..." : "Sign In"}
         </button>
+        <OAuth />
       </form>
       <div className="mt-3">
         <span>Dont have an account?</span>

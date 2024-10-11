@@ -8,9 +8,7 @@ const Header = () => {
         <Link to="/">
           <h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
             <span className="text-slate-600">Find</span>
-            <span cla ssName="text-slate-400">
-              MyNest
-            </span>
+            <span className="text-slate-400">MyNest</span>
           </h1>
         </Link>
         <form className="bg-slate-100 p-3 rounded-lg flex items-center">

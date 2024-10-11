@@ -31,12 +31,13 @@ const SignIn = () => {
       });
       const data = await res.json();
 
-      if (data.success === false) {
-        dispatch(signInFailure(data));
-        return;
+      if (res.ok && data) {
+        dispatch(signInSuccess(data));
+        navigate("/"); // Navigate to the home page on successful sign-in
+      } else {
+        // Handle incorrect credentials, stay on the sign-in page
+        dispatch(signInFailure(data.message || "Invalid credentials"));
       }
-      dispatch(signInSuccess(data));
-      navigate("/");
     } catch (error) {
       dispatch(signInFailure(error.message));
     }

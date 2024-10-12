@@ -33,10 +33,10 @@ const Header = () => {
             </li>
           </Link>
           <Link to="/profile">
-            {currentUser ? (
+            {currentUser.currentUser ? (
               <img
                 className="rounded-full h-7 w-7 object-cover"
-                src={currentUser.currentUser.avatar}
+                src={currentUser?.currentUser?.avatar}
                 alt="profile"
               />
             ) : (

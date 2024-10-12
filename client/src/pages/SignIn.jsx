@@ -37,7 +37,7 @@ const SignIn = () => {
         navigate("/"); // Navigate to the home page on successful sign-in
       } else {
         // Handle incorrect credentials, stay on the sign-in page
-        dispatch(signInFailure(data.message || "Invalid credentials"));
+        dispatch(signInFailure(data.message || "Invalid credentials(si)"));
       }
     } catch (error) {
       dispatch(signInFailure(error.message));

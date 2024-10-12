@@ -12,6 +12,12 @@ import {
   updateUserFailure,
   updateUserStart,
   updateUserSuccess,
+  deleteUserFailure,
+  deleteUserSuccess,
+  deleteUserStart,
+  signOutUserFailure,
+  signOutUserSuccess,
+  signOutUserStart,
 } from "../redux/user/userSlice.js";
 
 const Profile = () => {
@@ -86,6 +92,37 @@ const Profile = () => {
       dispatch(updateUserFailure(error.message));
     }
   };
+  const handleDeleteUser = async () => {
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      dispatch(signOutUserStart());
+      const res = await fetch("/api/auth/signout");
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(signOutUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+    } catch (error) {
+      dispatch(signOutUserFailure(data.message));
+    }
+  };
 
   return (
     <div className="p-3 max-w-lg mx-auto">
@@ -148,10 +185,16 @@ const Profile = () => {
         </button>
       </form>
       <div className="mt-3 flex justify-between">
-        <span className="text-red-700 font-semibold cursor-pointer">
+        <span
+          onClick={handleDeleteUser}
+          className="text-red-700 font-semibold cursor-pointer"
+        >
           Delete Account
         </span>
-        <span className="text-red-700 font-semibold cursor-pointer">
+        <span
+          onClick={handleSignOut}
+          className="text-red-700 font-semibold cursor-pointer"
+        >
           Sign Out
         </span>
       </div>

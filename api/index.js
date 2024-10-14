@@ -1,4 +1,5 @@
 import express from "express";
+import http from "http";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import authRouter from "./routes/auth.route.js";
@@ -42,8 +43,8 @@ app.use((err, req, res, next) => {
   });
 });
 const server = http.createServer(app);
-server.keepAliveTimeout = 120000; // 120 seconds
-server.headersTimeout = 120000; // 120 seconds
+server.keepAliveTimeout = 120000;
+server.headersTimeout = 120000;
 
 app.listen(process.env.PORT || 3000, "0.0.0.0", () => {
   console.log(`Server is running on port ${process.env.PORT || 3000}`);

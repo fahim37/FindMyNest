@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import { useSelector } from "react-redux";
@@ -106,7 +106,7 @@ export default function Listing() {
               </p>
               {listing.offer && (
                 <p className="bg-green-800 w-full max-w-[200px] text-white text-center p-1 rounded-md">
-                  ${+listing.regularPrice - +listing.discountPrice} OFF
+                  ৳{+listing.regularPrice - +listing.discountPrice} OFF
                 </p>
               )}
             </div>
@@ -136,6 +136,14 @@ export default function Listing() {
                 {listing.furnished ? "Furnished" : "Unfurnished"}
               </li>
             </ul>
+            {!currentUser && (
+              <Link
+                to={"/sign-in"}
+                className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3 text-center"
+              >
+                Sign in to send message
+              </Link>
+            )}
             {currentUser && listing.userRef !== currentUser._id && !contact && (
               <button
                 onClick={() => setContact(true)}

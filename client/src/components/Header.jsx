@@ -24,11 +24,11 @@ const Header = () => {
   }, [location.search]);
   return (
     <header className="bg-slate-200">
-      <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
+      <div className="flex justify-between items-center max-w-7xl mx-auto p-3">
         <Link to="/">
-          <h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
-            <span className="text-slate-600">Find</span>
-            <span className="text-slate-400">MyNest</span>
+          <h1 className="font-bold text-l sm:text-2xl flex flex-wrap">
+            <span className="text-[#B22222]">Find</span>
+            <span className="text-[#708090]">MyNest</span>
           </h1>
         </Link>
         <form
@@ -43,7 +43,7 @@ const Header = () => {
             value={searchTerm}
           />
           <button>
-            <FaSearch className="text-slate-600" />
+            <FaSearch className="text-[#B22222]" />
           </button>
         </form>
         <ul className="flex gap-4">

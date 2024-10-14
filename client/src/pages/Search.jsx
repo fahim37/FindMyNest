@@ -232,7 +232,7 @@ const Search = () => {
         <h1 className="text-3xl font-semibold p-3 border-b-2 mt-4">
           Available Listings:
         </h1>
-        <div className="p-7 flex flex-wrap ">
+        <div className="p-7 flex flex-wrap gap-5">
           {!loading && listings.length === 0 && (
             <p className="text-xl">No Listing Found</p>
           )}

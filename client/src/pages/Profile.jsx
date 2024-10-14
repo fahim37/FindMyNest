@@ -243,7 +243,8 @@ const Profile = () => {
       </p>
       <button
         onClick={handleShowListings}
-        className="text-green-700 w-full font-semibold"
+        className="text-green-700 w-full text-[18px]
+         font-semibold"
       >
         Show Listing
       </button>
